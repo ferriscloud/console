@@ -1,73 +1,67 @@
-# React + TypeScript + Vite
+# FerrisCloud Console
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Console web pour FerrisCloud - Cloud open source.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19 + TypeScript
+- Tanstack Router + Query
+- TailwindCSS 4 + ShadCN/ui
+- Vite (rolldown)
 
-## React Compiler
+## Installation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm install
+pnpm routes:generate
+pnpm dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```
+src/
+├── routes/              # Routes Tanstack Router
+├── pages/               # Domaines par fonctionnalité
+│   └── [domain]/
+│       ├── features/    # Composants "smart" (logique + API)
+│       ├── ui/          # Composants "dumb" (présentation)
+│       └── index.tsx    # Export du Feature
+└── components/ui/       # Composants partagés (ShadCN)
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Convention
+
+Chaque domaine suit ce pattern :
+
+```typescript
+// ui/my-page.tsx - Présentation pure
+export function MyPage({ data, loading }: MyPageProps) {
+  return <div>{data}</div>;
+}
+
+// features/my-page-feature.tsx - Logique métier
+export function MyPageFeature() {
+  const { data, isLoading } = useQuery(...);
+  return <MyPage data={data} loading={isLoading} />;
+}
+
+// index.tsx - Export
+export { MyPageFeature as MyPage } from './features/my-page-feature';
+```
+
+## Créer un domaine
+
+```bash
+./scripts/create-domain.sh compute
+pnpm routes:generate
+```
+
+## Commandes
+
+```bash
+pnpm dev                 # Dev server
+pnpm build              # Build production
+pnpm routes:generate    # Générer les routes
+pnpm routes:watch       # Watch mode routes
 ```

@@ -1,9 +1,6 @@
-import { createRootRoute, Outlet } from '@tanstack/react-router';
+import { createRootRoute } from '@tanstack/react-router';
+import { AppLayout } from '@/components/layout/app-layout';
 
 export const Route = createRootRoute({
-  component: () => (
-    <div className="min-h-screen bg-background text-foreground">
-      <Outlet />
-    </div>
-  ),
+  component: AppLayout,
 });

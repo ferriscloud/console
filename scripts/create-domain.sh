@@ -43,30 +43,28 @@ interface ${DOMAIN_CAPITALIZED}PageProps {
 
 export function ${DOMAIN_CAPITALIZED}Page({ items = [], loading }: ${DOMAIN_CAPITALIZED}PageProps) {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <h1 className="text-3xl font-semibold text-gray-900 dark:text-gray-100 mb-8">
-          ${DOMAIN_CAPITALIZED}
-        </h1>
+    <div className="p-8">
+      <h1 className="text-3xl font-semibold text-gray-900 dark:text-gray-100 mb-8">
+        ${DOMAIN_CAPITALIZED}
+      </h1>
 
-        {loading ? (
-          <div className="space-y-4">
-            {[1, 2, 3].map((i) => (
-              <Card key={i} className="p-6">
-                <div className="h-6 bg-gray-200 dark:bg-gray-700 animate-pulse rounded" />
-              </Card>
-            ))}
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {items.map((item) => (
-              <Card key={item.id} className="p-6">
-                <p className="text-lg">{item.name}</p>
-              </Card>
-            ))}
-          </div>
-        )}
-      </div>
+      {loading ? (
+        <div className="space-y-4">
+          {[1, 2, 3].map((i) => (
+            <Card key={i} className="p-6">
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 animate-pulse rounded" />
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {items.map((item) => (
+            <Card key={item.id} className="p-6">
+              <p className="text-lg">{item.name}</p>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

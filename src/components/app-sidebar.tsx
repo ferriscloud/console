@@ -1,19 +1,19 @@
 import * as React from "react"
 import {
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
+  Cloud,
+  Home,
+  Server,
+  HardDrive,
+  Network,
+  Database,
+  BarChart3,
+  Shield,
+  Settings,
   LifeBuoy,
-  Map,
-  PieChart,
-  Send,
-  Settings2,
-  SquareTerminal,
+  FileText,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
 import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
 import {
@@ -28,124 +28,153 @@ import {
 
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    name: "Utilisateur",
+    email: "user@ferriscloud.io",
+    avatar: "/avatars/user.jpg",
   },
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
+      title: "Accueil",
+      url: "/welcome",
+      icon: Home,
       isActive: true,
+    },
+    {
+      title: "Compute",
+      url: "/compute",
+      icon: Server,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Instances",
+          url: "/compute/instances",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Images",
+          url: "/compute/images",
         },
         {
-          title: "Settings",
-          url: "#",
+          title: "Snapshots",
+          url: "/compute/snapshots",
         },
       ],
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
+      title: "Stockage",
+      url: "/storage",
+      icon: HardDrive,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Buckets",
+          url: "/storage/buckets",
         },
         {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
+          title: "Volumes",
+          url: "/storage/volumes",
         },
       ],
     },
     {
-      title: "Documentation",
-      url: "#",
-      icon: BookOpen,
+      title: "Réseau",
+      url: "/network",
+      icon: Network,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: "VPC",
+          url: "/network/vpc",
         },
         {
-          title: "Get Started",
-          url: "#",
+          title: "Pare-feu",
+          url: "/network/firewall",
         },
         {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
+          title: "Load Balancers",
+          url: "/network/load-balancers",
         },
       ],
     },
     {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
+      title: "Bases de données",
+      url: "/database",
+      icon: Database,
       items: [
         {
-          title: "General",
-          url: "#",
+          title: "Instances",
+          url: "/database/instances",
         },
         {
-          title: "Team",
-          url: "#",
+          title: "Backups",
+          url: "/database/backups",
+        },
+      ],
+    },
+    {
+      title: "Monitoring",
+      url: "/monitoring",
+      icon: BarChart3,
+      items: [
+        {
+          title: "Métriques",
+          url: "/monitoring/metrics",
         },
         {
-          title: "Billing",
-          url: "#",
+          title: "Logs",
+          url: "/monitoring/logs",
         },
         {
-          title: "Limits",
-          url: "#",
+          title: "Alertes",
+          url: "/monitoring/alerts",
+        },
+      ],
+    },
+    {
+      title: "Sécurité",
+      url: "/security",
+      icon: Shield,
+      items: [
+        {
+          title: "IAM",
+          url: "/security/iam",
+        },
+        {
+          title: "Clés SSH",
+          url: "/security/ssh-keys",
+        },
+        {
+          title: "API Keys",
+          url: "/security/api-keys",
+        },
+      ],
+    },
+    {
+      title: "Paramètres",
+      url: "/settings",
+      icon: Settings,
+      items: [
+        {
+          title: "Profil",
+          url: "/settings/profile",
+        },
+        {
+          title: "Facturation",
+          url: "/settings/billing",
+        },
+        {
+          title: "Équipe",
+          url: "/settings/team",
         },
       ],
     },
   ],
   navSecondary: [
     {
+      title: "Documentation",
+      url: "#",
+      icon: FileText,
+    },
+    {
       title: "Support",
       url: "#",
       icon: LifeBuoy,
-    },
-    {
-      title: "Feedback",
-      url: "#",
-      icon: Send,
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
 }
@@ -160,13 +189,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <a href="/welcome">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <Command className="size-4" />
+                  <Cloud className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
+                  <span className="truncate font-medium">FerrisCloud</span>
+                  <span className="truncate text-xs">v0.1.0</span>
                 </div>
               </a>
             </SidebarMenuButton>
@@ -175,7 +204,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>

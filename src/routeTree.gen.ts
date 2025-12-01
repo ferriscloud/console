@@ -10,11 +10,19 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WelcomeRouteImport } from './routes/welcome'
+import { Route as ComputeRouteImport } from './routes/compute'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComputeInstancesRouteImport } from './routes/compute_.instances'
+import { Route as ComputeInstancesCreateRouteImport } from './routes/compute_.instances_.create'
 
 const WelcomeRoute = WelcomeRouteImport.update({
   id: '/welcome',
   path: '/welcome',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComputeRoute = ComputeRouteImport.update({
+  id: '/compute',
+  path: '/compute',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,31 +30,69 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComputeInstancesRoute = ComputeInstancesRouteImport.update({
+  id: '/compute_/instances',
+  path: '/compute/instances',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComputeInstancesCreateRoute = ComputeInstancesCreateRouteImport.update({
+  id: '/compute_/instances_/create',
+  path: '/compute/instances/create',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/compute': typeof ComputeRoute
   '/welcome': typeof WelcomeRoute
+  '/compute/instances': typeof ComputeInstancesRoute
+  '/compute/instances/create': typeof ComputeInstancesCreateRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/compute': typeof ComputeRoute
   '/welcome': typeof WelcomeRoute
+  '/compute/instances': typeof ComputeInstancesRoute
+  '/compute/instances/create': typeof ComputeInstancesCreateRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/compute': typeof ComputeRoute
   '/welcome': typeof WelcomeRoute
+  '/compute_/instances': typeof ComputeInstancesRoute
+  '/compute_/instances_/create': typeof ComputeInstancesCreateRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/welcome'
+  fullPaths:
+    | '/'
+    | '/compute'
+    | '/welcome'
+    | '/compute/instances'
+    | '/compute/instances/create'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/welcome'
-  id: '__root__' | '/' | '/welcome'
+  to:
+    | '/'
+    | '/compute'
+    | '/welcome'
+    | '/compute/instances'
+    | '/compute/instances/create'
+  id:
+    | '__root__'
+    | '/'
+    | '/compute'
+    | '/welcome'
+    | '/compute_/instances'
+    | '/compute_/instances_/create'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComputeRoute: typeof ComputeRoute
   WelcomeRoute: typeof WelcomeRoute
+  ComputeInstancesRoute: typeof ComputeInstancesRoute
+  ComputeInstancesCreateRoute: typeof ComputeInstancesCreateRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +104,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WelcomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compute': {
+      id: '/compute'
+      path: '/compute'
+      fullPath: '/compute'
+      preLoaderRoute: typeof ComputeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -65,12 +118,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compute_/instances': {
+      id: '/compute_/instances'
+      path: '/compute/instances'
+      fullPath: '/compute/instances'
+      preLoaderRoute: typeof ComputeInstancesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compute_/instances_/create': {
+      id: '/compute_/instances_/create'
+      path: '/compute/instances/create'
+      fullPath: '/compute/instances/create'
+      preLoaderRoute: typeof ComputeInstancesCreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComputeRoute: ComputeRoute,
   WelcomeRoute: WelcomeRoute,
+  ComputeInstancesRoute: ComputeInstancesRoute,
+  ComputeInstancesCreateRoute: ComputeInstancesCreateRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

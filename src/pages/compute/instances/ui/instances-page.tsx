@@ -284,7 +284,7 @@ export function InstancesPage() {
             </div>
           </div>
           <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white">
-            <Link to="/compute/instances">
+            <Link to="/compute/instances/create">
               <Plus className="w-4 h-4 mr-2" />
               Créer une instance
             </Link>

@@ -11,7 +11,7 @@ export function ServiceCard({ icon: Icon, title, onClick }: ServiceCardProps) {
   return (
     <Card
       onClick={onClick}
-      className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:shadow-md transition-shadow cursor-pointer group"
+      className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:shadow-md shadow-2xs transition-shadow cursor-pointer group"
     >
       <div className="p-5 flex items-start gap-3">
         <div className="w-6 h-6 flex items-center justify-center">

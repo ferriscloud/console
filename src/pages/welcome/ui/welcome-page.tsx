@@ -50,10 +50,8 @@ export function WelcomePage() {
         <div className="space-y-3">
           <div className="flex flex-wrap gap-3">
             <ActionButton icon={Plus}>Create a VM</ActionButton>
-            <ActionButton icon={Plus}>Run a query in BigQuery</ActionButton>
+
             <ActionButton icon={Plus}>Deploy an application</ActionButton>
-          </div>
-          <div>
             <ActionButton icon={Plus}>Create a storage bucket</ActionButton>
           </div>
         </div>
@@ -70,7 +68,7 @@ export function WelcomePage() {
             <ServiceCard icon={CreditCard} title="Billing" />
             <ServiceCard icon={Server} title="Compute Engine" />
             <ServiceCard icon={HardDrive} title="Cloud Storage" />
-            <ServiceCard icon={Database} title="BigQuery" />
+            <ServiceCard icon={Database} title="Database" />
             <ServiceCard icon={Network} title="VPC network" />
             <ServiceCard icon={Box} title="Kubernetes Engine" />
           </div>
@@ -87,22 +85,22 @@ export function WelcomePage() {
           </div>
         </div>
 
-        {/* Promo Card (Google Developer Programme style) */}
+
         <div className="mt-8">
           <Card className="bg-linear-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20 border border-blue-100 dark:border-blue-900/30">
             <div className="p-8 flex items-start justify-between">
               <div className="space-y-3 max-w-xl">
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-                  Join the FerrisCloud Developer Programme
+                  Support FerrisCloud
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  to learn new skills and dev tools at no cost.
+                  Get expert help for all your FerrisCloud needs with our
                 </p>
                 <Button
                   variant="ghost"
                   className="text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-950/50 p-0 h-auto font-medium"
                 >
-                  Join today
+                  Explore Support Plans
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </Button>
               </div>
